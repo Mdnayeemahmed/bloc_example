@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 
 
-abstract class SwitchExampleEvent{
-  SwitchExampleEvent();
+abstract class SwitchExampleEvent extends Equatable{
+  const SwitchExampleEvent();
   @override
   List<Object> get props => [];
 }
