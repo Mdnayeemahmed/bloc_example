@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled5/bloc/counter/counter_bloc.dart';
 import 'package:untitled5/bloc/fav_app/fav_app_bloc.dart';
 import 'package:untitled5/bloc/image_picker/image_picker__bloc.dart';
+import 'package:untitled5/bloc/posts/posts_bloc.dart';
 import 'package:untitled5/bloc/swicher_example/switch_example_bloc.dart';
 import 'package:untitled5/bloc/todo/todo_bloc.dart';
 import 'package:untitled5/repo/fav_repo.dart';
 import 'package:untitled5/ui/ToDo/to_do_screen.dart';
 import 'package:untitled5/ui/fav_app/fav_app_screen.dart';
 import 'package:untitled5/ui/image_picker/image_picker_screen.dart';
+import 'package:untitled5/ui/post/post_screen.dart';
 import 'package:untitled5/ui/utils/image_picker_utils.dart';
 
 import 'ui/switch/switch_example_screen.dart';
@@ -37,6 +39,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => FavAppBloc(FavRepo()),
         ),
+        BlocProvider(
+          create: (_) => PostsBloc(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -45,7 +50,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           useMaterial3: true,
         ),
-        home: const FavAppScreen(),
+        home: const PostScreen(),
       ),
     );
   }
