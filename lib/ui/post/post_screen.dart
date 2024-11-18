@@ -14,7 +14,6 @@ class PostScreen extends StatefulWidget {
 }
 
 class _PostScreenState extends State<PostScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -25,29 +24,61 @@ class _PostScreenState extends State<PostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Post Screen"), centerTitle: true,),
+      appBar: AppBar(
+        title: Text("Post Screen"),
+        centerTitle: true,
+      ),
       body: BlocBuilder<PostsBloc, PostsState>(
         builder: (context, state) {
-          switch (state.postStatus){
+          switch (state.postStatus) {
             case PostStatus.loading:
               return Center(child: CircularProgressIndicator());
             case PostStatus.success:
-              return ListView.builder(
-                itemCount: state.postList.length,
-                itemBuilder: (context,index) {
-                  final item=state.postList[index];
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Search By Email',
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      onChanged: (filterKey) {
+                        print(filterKey);
+                        context.read<PostsBloc>().add(SearchByEmail(filterKey));
+                      },
+                    ),
+                    Expanded(
+                      child: state.searchMsg.isNotEmpty
+                          ? Center(
+                        child: Text(state.searchMsg),
+                      )
+                          : ListView.builder(
+                        itemCount: state.tempPostList.isNotEmpty
+                            ? state.tempPostList.length
+                            : state.postList.length,
+                        itemBuilder: (context, index) {
+                          // Choose the appropriate list to display
+                          final item = state.tempPostList.isNotEmpty
+                              ? state.tempPostList[index]
+                              : state.postList[index];
 
-                  return ListTile(
-                    title: Text(item.email.toString()),
-                    subtitle: Text(item.body.toString()),
-
-                  );
-                }
+                          return ListTile(
+                            title: Text(item.email!),
+                            subtitle: Text(item.body!),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               );
             case PostStatus.failure:
               return Center(child: Text(state.msg));
           }
-
         },
       ),
     );

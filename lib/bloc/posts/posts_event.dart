@@ -12,3 +12,9 @@ class FetchPost extends PostsEvent{
 
 }
 
+class SearchByEmail extends PostsEvent{
+  final String searchByEmail;
+  const SearchByEmail(this.searchByEmail);
+
+}
+
