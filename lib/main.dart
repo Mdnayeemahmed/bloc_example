@@ -8,6 +8,8 @@ import 'package:untitled5/bloc/swicher_example/switch_example_bloc.dart';
 import 'package:untitled5/bloc/todo/todo_bloc.dart';
 import 'package:untitled5/repo/fav_repo.dart';
 import 'package:untitled5/ui/ToDo/to_do_screen.dart';
+import 'package:untitled5/ui/authentication/login.dart';
+import 'package:untitled5/ui/counter/counter_screen.dart';
 import 'package:untitled5/ui/fav_app/fav_app_screen.dart';
 import 'package:untitled5/ui/image_picker/image_picker_screen.dart';
 import 'package:untitled5/ui/post/post_screen.dart';
@@ -50,7 +52,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           useMaterial3: true,
         ),
-        home: const PostScreen(),
+        home: const LoginScreen(),
       ),
     );
   }
